@@ -1,0 +1,70 @@
+
+  <div class="row">
+    <div class="col-xs-12">
+      <form  [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-xs-12">
+              <div class="form-group">
+                  <label for="name">Name</label>
+                  <input id="name" type="text" class="form-control" formControlName="name">
+                </div>
+          </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="image">Path</label>
+                    <input id="image" type="text" class="form-control" formControlName="image">
+                  </div>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <img [src]="myForm.value['image']" class="img-responsive">
+            </div>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-xs-12">
+        <div class="class-group">
+            <label for="des">Description</label>
+            <textarea style="width:100%" id="des" type="text" rows="5" class="class-control" formControlName="description"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="ingredients">
+      <div style="margin-top: 5px" class="row" *ngFor="let ing of getControls(); let i = index" [formGroupName]='i'>
+        <div class="col-xs-8">
+            <input type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="col-xs-2">
+            <input type="number" class="form-control" formControlName="amount">
+        </div>
+        <div class="col-xs-2">
+          <button class="btn btn-danger" type="button" (click)="onDeleteIng(i)">X</button>
+        </div> 
+      </div>  
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+            <button style="margin-top: 5px" class="btn btn-success" type="button" (click)="onAddIng()">Add Ingredient</button>
+        </div>
+      </div>
+        <hr>
+        <button style="margin-top: 5px" 
+                type="submit" 
+                [disabled]="myForm.invalid" 
+                class="btn btn-success"
+                >Submit</button>
+
+                <button style="margin-top: 5px" 
+                type="button" 
+                class="btn btn-warning pull-right"
+                (click)="onCancel()">Cancel</button>        
+      </form>
+    </div>
+  </div>
